@@ -1,0 +1,2 @@
+[dffml.model]
+myslr = sktime.myslr:MySLRModel
