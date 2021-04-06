@@ -1,16 +1,15 @@
 
 import pathlib
+import pandas as pd
+import numpy as np
 from typing import AsyncIterator, Type
 
 from sktime.datasets import load_airline
-#from sktime.forecasting.arima import ARIMA, AutoARIMA
 from sktime.forecasting.base import ForecastingHorizon
 from sktime.forecasting.exp_smoothing import ExponentialSmoothing
 from sktime.performance_metrics.forecasting import sMAPE, smape_loss
-#from sktime.utils.plotting import plot_series
 
-import pandas as pd
-import numpy as np
+
 
 from dffml import (
     Accuracy,
@@ -57,7 +56,7 @@ class ExpModel(SimpleModel):
                 )
 
             X.append(record_data)
-            #X.append(record.feature(self.parent.config.predict.name))
+           
 
         
         X = pd.DataFrame(X)
@@ -127,19 +126,3 @@ class ExpModel(SimpleModel):
 
         return predictions    
 
-"""
-        # Update records and yield them to caller
-        for record, prediction in zip(input_data, predictions):
-            record.predicted(
-                self.config.predict.name, float(prediction), float("nan")
-            )
-            yield record
-
-    async def get_input_data(self, sources: SourcesContext) -> list:
-        saved_records = []
-        async for record in sources.with_features(
-            self.config.features.names()
-        ):
-            saved_records.append(record)
-        return saved_records
-"""
